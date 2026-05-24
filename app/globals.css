@@ -1,26 +1,128 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+@theme {
+  /* ── Fuentes reales de la marca ──────────────────────────── */
+  --font-display: var(--font-montserrat), "Arial", sans-serif;
+  --font-body:    var(--font-roboto), "system-ui", sans-serif;
+
+  /* ── Paleta exacta de Propiedades Sosa (extraída del sitio) ─ */
+
+  /* Teal oscuro — color del header/nav, botones principales */
+  --color-brand-primary:   #23485B;
+
+  /* Dorado oliva — del texto del logo, acento clave */
+  --color-brand-accent:    #B1A73B;
+
+  /* Navy oscuro — usado en headings h1-h3 */
+  --color-brand-navy:      #2B3546;
+
+  /* Teal muy oscuro — fondos dark, sombras */
+  --color-brand-dark:      #152B36;
+
+  /* Teal medio — hover states, variante del primary */
+  --color-brand-teal:      #385A6B;
+
+  /* Azul claro — background principal del sitio */
+  --color-brand-secondary: #EBF0FA;
+
+  /* Texto body — azul-gris medio */
+  --color-brand-text:      #62708A;
+
+  /* Amarillo CTA — acento vibrante para CTAs destacados */
+  --color-brand-cta:       #fec42d;
+
+  /* ── Escala neutral cálida-fría ──────────────────────────── */
+  --color-neutral-50:  #F5F7FC;
+  --color-neutral-100: #EBF0FA;
+  --color-neutral-200: #D4DCEC;
+  --color-neutral-300: #B8C4D8;
+  --color-neutral-400: #8FA0BA;
+  --color-neutral-500: #62708A;
+  --color-neutral-600: #4A5570;
+  --color-neutral-700: #323D56;
+  --color-neutral-800: #1E2A3D;
+  --color-neutral-900: #0F1828;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
+/* ─── Scrollbar ──────────────────────────────────────────────── */
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: #B1A73B55; border-radius: 999px; }
+::-webkit-scrollbar-thumb:hover { background: #B1A73B99; }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
-}
+/* ─── Selection ──────────────────────────────────────────────── */
+::selection { background: #B1A73B33; color: #2B3546; }
+
+/* ─── Base ───────────────────────────────────────────────────── */
+html { scroll-behavior: smooth; }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background-color: #F5F7FC;
+  color: #2B3546;
+  font-family: var(--font-body);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
 }
+
+*:focus-visible {
+  outline: 2px solid var(--color-brand-accent);
+  outline-offset: 3px;
+}
+
+/* ─── Typography helpers ─────────────────────────────────────── */
+.font-display { font-family: var(--font-display); }
+
+/* ─── Keyframes ──────────────────────────────────────────────── */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(28px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+@keyframes scaleIn {
+  from { opacity: 0; transform: scale(1.06); }
+  to   { opacity: 1; transform: scale(1); }
+}
+
+@keyframes shimmer {
+  0%   { background-position: -200% 0; }
+  100% { background-position:  200% 0; }
+}
+
+/* ─── Grain overlay (luxury feel) ───────────────────────────── */
+.grain-overlay {
+  position: relative;
+}
+.grain-overlay::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-size: 200px;
+  opacity: 0.025;
+  mix-blend-mode: overlay;
+  z-index: 1;
+}
+
+/* ─── Animated underline link ────────────────────────────────── */
+.link-underline {
+  position: relative;
+  display: inline-block;
+}
+.link-underline::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  height: 1px;
+  width: 0;
+  background: currentColor;
+  transition: width 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.link-underline:hover::after { width: 100%; }

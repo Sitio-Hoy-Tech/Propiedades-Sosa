@@ -1,36 +1,52 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Propiedades Sosa
 
-## Getting Started
+Sitio web de Propiedades Sosa construido con SitioHoy.
 
-First, run the development server:
+- **Plan:** Esencial
+- **Slug:** propiedades-sosa
+- **Stack:** Next.js + TypeScript + Tailwind + Supabase + Vercel
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+## Setup local
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+1. Instalar dependencias:
+   ```bash
+   npm install
+   ```
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+2. Copiar `.env.local.example` a `.env.local` y completar las variables.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+3. Correr en desarrollo:
+   ```bash
+   npm run dev
+   ```
 
-## Learn More
+4. Build de producción:
+   ```bash
+   npm run build
+   ```
 
-To learn more about Next.js, take a look at the following resources:
+## Estructura
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+- `app/` — rutas y páginas (App Router)
+- `lib/` — utilidades compartidas (Supabase, helpers)
+- `proxy.ts` — middleware de sesión Supabase (NO `middleware.ts`)
+- `scripts/setup-rls.sql` — políticas RLS para Supabase (ejecutar una sola vez en el SQL Editor de Supabase)
+- `skills/` — documentación de skills de SitioHoy (referencia interna)
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## Base de datos
 
-## Deploy on Vercel
+Ejecutar en Supabase SQL Editor en este orden:
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+1. `scripts/setup-rls.sql` — crea el tenant y configura RLS
+2. Copiar el UUID del tenant que imprime el script → pegarlo en `.env.local` como `NEXT_PUBLIC_TENANT_ID`
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## Deploy
+
+Deploy en Vercel:
+- Conectar el repo
+- Configurar las variables de entorno
+- Configurar el dominio en Cloudflare apuntando a Vercel
+
+## Soporte
+
+Cualquier consulta: [SitioHoy](https://sitiohoy.com.ar)
