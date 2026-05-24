@@ -287,7 +287,7 @@ export default async function ProductPage({
     <div className="min-h-screen bg-neutral-50 pt-20">
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbLd) }} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(listingLd) }} />
-      <div className="max-w-7xl mx-auto px-6 lg:px-10 py-12">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-10 py-8 sm:py-12">
         <ScrollReveal>
           <nav className="flex items-center gap-2 text-sm text-neutral-400 mb-8">
             <Link href="/" className="hover:text-brand-accent transition-colors">Inicio</Link>

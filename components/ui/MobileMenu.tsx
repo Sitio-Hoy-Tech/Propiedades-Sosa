@@ -41,7 +41,7 @@ export default function MobileMenu({ open, onClose }: MobileMenuProps) {
             onClick={onClose}
           />
           <motion.nav
-            className="fixed top-0 right-0 z-50 h-full w-72 bg-brand-primary flex flex-col py-10 px-8 shadow-2xl"
+            className="fixed top-0 right-0 z-50 h-full w-[85vw] max-w-72 bg-brand-primary flex flex-col py-10 px-7 shadow-2xl overflow-y-auto"
             initial={{ x: "100%" }}
             animate={{ x: 0 }}
             exit={{ x: "100%" }}

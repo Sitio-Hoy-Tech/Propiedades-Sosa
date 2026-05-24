@@ -75,8 +75,11 @@ export default function PropertyCard({ property, index = 0, tall = false }: Prop
       <Link href={`/producto/${property.slug}`} className="block relative overflow-hidden" style={{ borderRadius: "4px" }}>
         {/* Image */}
         <div
-          className="relative overflow-hidden"
-          style={{ height: tall ? "520px" : "380px" }}
+          className={`relative overflow-hidden ${
+            tall
+              ? "h-[260px] sm:h-[380px] lg:h-[520px]"
+              : "h-[220px] sm:h-[280px] lg:h-[380px]"
+          }`}
         >
           <Image
             src={property.imageUrl}

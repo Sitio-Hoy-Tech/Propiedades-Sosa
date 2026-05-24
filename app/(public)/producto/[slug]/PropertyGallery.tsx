@@ -18,7 +18,7 @@ export default function PropertyGallery({ images, name }: PropertyGalleryProps) 
   return (
     <div className="flex flex-col gap-3">
       {/* Main image */}
-      <div className="relative h-[400px] md:h-[520px] rounded-2xl overflow-hidden bg-neutral-200">
+      <div className="relative h-[260px] sm:h-[400px] md:h-[520px] rounded-2xl overflow-hidden bg-neutral-200">
         <AnimatePresence mode="wait">
           <motion.div
             key={current}

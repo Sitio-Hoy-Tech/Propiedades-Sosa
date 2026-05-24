@@ -129,8 +129,8 @@ export default function NosotrosPage() {
       </section>
 
       {/* Historia */}
-      <section className="py-24 px-6">
-        <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+      <section className="py-14 px-4 sm:px-6 lg:py-24">
+        <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16 items-center">
           <ScrollReveal direction="left">
             <span className="text-brand-accent text-xs font-semibold tracking-widest uppercase">
               Nuestra historia
@@ -152,7 +152,7 @@ export default function NosotrosPage() {
           </ScrollReveal>
 
           <ScrollReveal direction="right">
-            <div className="relative h-[380px] rounded-2xl overflow-hidden shadow-xl">
+            <div className="relative h-64 sm:h-[380px] rounded-2xl overflow-hidden shadow-xl">
               <Image
                 src={officImg}
                 alt="Nuestra oficina"
@@ -168,7 +168,7 @@ export default function NosotrosPage() {
       </section>
 
       {/* Values */}
-      <section className="py-20 px-6 bg-brand-primary">
+      <section className="py-14 px-4 sm:px-6 lg:py-20 bg-brand-primary">
         <div className="max-w-7xl mx-auto">
           <ScrollReveal className="text-center mb-14">
             <span className="text-brand-accent text-xs font-semibold tracking-widest uppercase">
@@ -202,7 +202,7 @@ export default function NosotrosPage() {
       </section>
 
       {/* Team */}
-      <section className="py-24 px-6 bg-neutral-50">
+      <section className="py-14 px-4 sm:px-6 lg:py-24 bg-neutral-50">
         <div className="max-w-7xl mx-auto">
           <ScrollReveal className="text-center mb-14">
             <span className="text-brand-accent text-xs font-semibold tracking-widest uppercase">
@@ -243,7 +243,7 @@ export default function NosotrosPage() {
       </section>
 
       {/* CTA */}
-      <section className="py-20 px-6 bg-neutral-100">
+      <section className="py-14 px-4 sm:px-6 lg:py-20 bg-neutral-100">
         <div className="max-w-2xl mx-auto text-center">
           <ScrollReveal>
             <h2

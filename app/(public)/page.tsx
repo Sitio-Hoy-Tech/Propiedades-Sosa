@@ -182,9 +182,9 @@ export default async function HomePage() {
       <HeroSection />
 
       {/* ── Featured Properties (Editorial Bento) ── */}
-      <section className="py-28 px-6 bg-neutral-50">
+      <section className="py-14 px-4 sm:px-6 lg:py-28 bg-neutral-50">
         <div className="max-w-7xl mx-auto">
-          <ScrollReveal className="mb-14 flex flex-col sm:flex-row sm:items-end justify-between gap-6">
+          <ScrollReveal className="mb-10 lg:mb-14 flex flex-col sm:flex-row sm:items-end justify-between gap-4 sm:gap-6">
             <div>
               <span className="flex items-center gap-3 text-brand-accent text-xs font-semibold tracking-[0.2em] uppercase mb-3">
                 <span className="h-px w-8 bg-brand-accent" />
@@ -230,7 +230,7 @@ export default async function HomePage() {
       </section>
 
       {/* ── Animated Numbers Band ── */}
-      <section className="py-24 px-6 bg-brand-dark overflow-hidden relative">
+      <section className="py-16 px-4 sm:px-6 lg:py-24 bg-brand-dark overflow-hidden relative">
         <div className="absolute inset-0 bg-gradient-to-br from-brand-primary/30 to-transparent" />
         <div className="relative max-w-7xl mx-auto">
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-10 sm:gap-4">
@@ -257,8 +257,8 @@ export default async function HomePage() {
       </section>
 
       {/* ── Services — numbered list ── */}
-      <section className="py-28 px-6 bg-neutral-50">
-        <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-[1fr_1.5fr] gap-20 items-start">
+      <section className="py-14 px-4 sm:px-6 lg:py-28 bg-neutral-50">
+        <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-[1fr_1.5fr] gap-12 lg:gap-20 items-start">
           <ScrollReveal direction="left" className="lg:sticky lg:top-28">
             <span className="flex items-center gap-3 text-brand-accent text-xs font-semibold tracking-[0.2em] uppercase mb-4">
               <span className="h-px w-8 bg-brand-accent" />
@@ -325,7 +325,7 @@ export default async function HomePage() {
               unoptimized
             />
             <div className="absolute inset-0 bg-brand-dark/20" />
-            <div className="absolute bottom-8 right-8 bg-white/95 backdrop-blur-sm px-6 py-5 shadow-xl" style={{ borderRadius: "4px" }}>
+            <div className="absolute bottom-4 right-4 sm:bottom-8 sm:right-8 bg-white/95 backdrop-blur-sm px-4 py-3 sm:px-6 sm:py-5 shadow-xl" style={{ borderRadius: "4px" }}>
               <p className="font-display text-3xl font-bold text-brand-navy" style={{ fontFamily: "var(--font-display)" }}>
                 2021
               </p>
@@ -333,7 +333,7 @@ export default async function HomePage() {
             </div>
           </ScrollReveal>
 
-          <ScrollReveal direction="right" className="flex flex-col justify-center px-10 lg:px-16 py-16">
+          <ScrollReveal direction="right" className="flex flex-col justify-center px-6 sm:px-10 lg:px-16 py-12 lg:py-16">
             <span className="flex items-center gap-3 text-brand-accent text-xs font-semibold tracking-[0.2em] uppercase mb-5">
               <span className="h-px w-8 bg-brand-accent" />
               Sobre nosotros

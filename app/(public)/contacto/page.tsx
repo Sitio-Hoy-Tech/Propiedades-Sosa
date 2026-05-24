@@ -45,7 +45,7 @@ export default function ContactPage() {
       />
 
       {/* Hero strip */}
-      <div className="bg-brand-primary py-16 px-6">
+      <div className="bg-brand-primary py-10 px-4 sm:px-6 lg:py-16">
         <div className="max-w-7xl mx-auto">
           <span className="text-brand-accent text-xs font-semibold tracking-widest uppercase">
             Contacto
@@ -59,10 +59,10 @@ export default function ContactPage() {
         </div>
       </div>
 
-      <div className="max-w-7xl mx-auto px-6 lg:px-10 py-16 grid grid-cols-1 lg:grid-cols-[1fr_400px] gap-12">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-10 py-10 lg:py-16 grid grid-cols-1 lg:grid-cols-[1fr_400px] gap-8 lg:gap-12">
         {/* Form */}
         <ScrollReveal direction="left">
-          <div className="bg-white rounded-2xl shadow-sm border border-neutral-100 p-8">
+          <div className="bg-white rounded-2xl shadow-sm border border-neutral-100 p-5 sm:p-8">
             <h2
               className="font-display text-2xl font-bold text-brand-navy mb-1"
               style={{ fontFamily: "var(--font-display)" }}
@@ -115,7 +115,7 @@ export default function ContactPage() {
                 </div>
                 <div>
                   <p className="text-xs text-white/50 mb-0.5">Email</p>
-                  <p className="text-white font-medium">info@propiedadessosa.com.ar</p>
+                  <p className="text-white font-medium break-all">info@propiedadessosa.com.ar</p>
                 </div>
               </a>
 

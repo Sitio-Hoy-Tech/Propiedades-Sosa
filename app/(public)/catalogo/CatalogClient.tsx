@@ -34,7 +34,7 @@ export default function CatalogClient({ properties }: CatalogClientProps) {
   }, [properties, activeTab, search]);
 
   return (
-    <div className="min-h-screen bg-neutral-50 pt-24 pb-20 px-6">
+    <div className="min-h-screen bg-neutral-50 pt-24 pb-16 px-4 sm:px-6">
       <div className="max-w-7xl mx-auto">
         {/* Header */}
         <div className="mb-12">
@@ -50,7 +50,7 @@ export default function CatalogClient({ properties }: CatalogClientProps) {
         </div>
 
         {/* Filters */}
-        <div className="flex flex-col sm:flex-row items-start sm:items-center gap-4 mb-10">
+        <div className="flex flex-col sm:flex-row items-start sm:items-center gap-3 sm:gap-4 mb-8 sm:mb-10">
           <div className="flex bg-white border border-neutral-200 rounded-xl p-1 gap-1">
             {TABS.map((tab) => (
               <button
@@ -74,7 +74,7 @@ export default function CatalogClient({ properties }: CatalogClientProps) {
             ))}
           </div>
 
-          <div className="relative flex-1 max-w-sm">
+          <div className="relative w-full sm:flex-1 sm:max-w-sm">
             <svg
               className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-neutral-400"
               fill="none"
@@ -93,7 +93,7 @@ export default function CatalogClient({ properties }: CatalogClientProps) {
             />
           </div>
 
-          <span className="text-neutral-400 text-sm ml-auto">
+          <span className="text-neutral-400 text-sm sm:ml-auto">
             {filtered.length} {filtered.length === 1 ? "propiedad" : "propiedades"}
           </span>
         </div>

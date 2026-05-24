@@ -158,14 +158,14 @@ export default function HeroSection() {
           {/* Subtitle */}
           <motion.p
             variants={FADE_UP}
-            className="text-white/65 text-lg leading-relaxed mb-12 max-w-xl"
+            className="text-white/65 text-base sm:text-lg leading-relaxed mb-8 lg:mb-12 max-w-xl"
           >
             Casas, departamentos, terrenos y locales comerciales en la mejor zona.
             Asesoramiento personalizado en cada etapa de tu inversión.
           </motion.p>
 
           {/* CTAs */}
-          <motion.div variants={FADE_UP} className="flex flex-col sm:flex-row gap-4 mb-20">
+          <motion.div variants={FADE_UP} className="flex flex-col sm:flex-row gap-3 sm:gap-4 mb-14 lg:mb-20">
             <Link
               href="/catalogo"
               className="group inline-flex items-center justify-center gap-3 bg-brand-accent text-white font-semibold px-8 py-4 transition-all duration-300 hover:bg-brand-accent/90 hover:gap-4 hover:-translate-y-0.5 shadow-lg shadow-brand-accent/25"
@@ -190,7 +190,7 @@ export default function HeroSection() {
           {/* Stats */}
           <motion.div
             variants={FADE_UP}
-            className="flex items-center gap-10 pt-8 border-t border-white/10"
+            className="flex items-center flex-wrap gap-6 sm:gap-10 pt-6 lg:pt-8 border-t border-white/10"
           >
             {[
               { to: 100, suffix: "+", label: "Propiedades gestionadas" },

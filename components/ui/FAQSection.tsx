@@ -42,8 +42,8 @@ export default function FAQSection() {
   const [open, setOpen] = useState<number | null>(0);
 
   return (
-    <section className="py-28 px-6 bg-neutral-50">
-      <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-[1fr_1.8fr] gap-20">
+    <section className="py-14 px-4 sm:px-6 lg:py-28 bg-neutral-50">
+      <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-[1fr_1.8fr] gap-10 lg:gap-20">
 
         {/* Left: heading sticky */}
         <div className="lg:sticky lg:top-28 self-start">
@@ -117,7 +117,7 @@ export default function FAQSection() {
                     transition={{ duration: 0.4, ease: EASE }}
                     className="overflow-hidden"
                   >
-                    <p className="pb-7 pl-11 text-neutral-500 leading-relaxed text-sm">
+                    <p className="pb-7 pl-8 sm:pl-11 text-neutral-500 leading-relaxed text-sm">
                       {faq.a}
                     </p>
                   </motion.div>

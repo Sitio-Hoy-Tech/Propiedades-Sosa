@@ -15,7 +15,7 @@ export default function Footer() {
   return (
     <footer className="bg-brand-dark text-white">
       {/* CTA Strip */}
-      <div className="border-b border-white/[0.06] py-20 px-6">
+      <div className="border-b border-white/[0.06] py-12 px-4 sm:px-6 lg:py-20">
         <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-center md:items-center justify-between gap-8 text-center md:text-left">
           <div>
             <h2
@@ -55,7 +55,7 @@ export default function Footer() {
       </div>
 
       {/* Main footer */}
-      <div className="py-16 px-6">
+      <div className="py-10 px-4 sm:px-6 lg:py-16">
         <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-[1.5fr_1fr_1fr] gap-12">
           {/* Brand */}
           <div>
@@ -100,7 +100,7 @@ export default function Footer() {
                 </a>
               </li>
               <li>
-                <a href="mailto:info@propiedadessosa.com.ar" className="text-white/50 hover:text-brand-accent transition-colors link-underline">
+                <a href="mailto:info@propiedadessosa.com.ar" className="text-white/50 hover:text-brand-accent transition-colors link-underline break-all">
                   info@propiedadessosa.com.ar
                 </a>
               </li>
@@ -113,7 +113,7 @@ export default function Footer() {
       </div>
 
       {/* Bottom bar */}
-      <div className="border-t border-white/[0.06] py-5 px-6">
+      <div className="border-t border-white/[0.06] py-5 px-4 sm:px-6">
         <div className="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-2 text-[11px] text-white/20">
           <span>© {year} Propiedades Sosa. Todos los derechos reservados.</span>
         </div>
