@@ -280,7 +280,7 @@ export default async function HomePage() {
           <div className="divide-y divide-neutral-200">
             {SERVICES.map((s, i) => (
               <ScrollReveal key={s.num} delay={i * 0.08} direction="right">
-                <div className="group py-7 flex gap-6 items-start cursor-default hover:bg-white hover:-mx-6 hover:px-6 transition-all duration-300">
+                <div className="group py-7 flex gap-6 items-start cursor-default lg:hover:bg-white lg:hover:-mx-6 lg:hover:px-6 transition-all duration-300">
                   <span
                     className="font-display text-neutral-200 group-hover:text-brand-accent transition-colors duration-300 text-sm font-bold flex-shrink-0 mt-0.5"
                     style={{ fontFamily: "var(--font-display)" }}

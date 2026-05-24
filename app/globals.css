@@ -54,7 +54,10 @@
 ::selection { background: #B1A73B33; color: #2B3546; }
 
 /* ─── Base ───────────────────────────────────────────────────── */
-html { scroll-behavior: smooth; }
+html {
+  scroll-behavior: smooth;
+  overflow-x: clip;
+}
 
 body {
   background-color: #F5F7FC;
@@ -63,6 +66,7 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-rendering: optimizeLegibility;
+  overflow-x: clip;
 }
 
 *:focus-visible {
