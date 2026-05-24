@@ -157,11 +157,40 @@ export async function generateMetadata({
   const { slug } = await params;
   const dbProduct = useRealData ? await getProduct(slug) : null;
   const mock = MOCK_PROPERTIES.find((p) => p.slug === slug);
+
   const name = (dbProduct?.name as string | undefined) ?? mock?.name ?? "Propiedad";
-  const desc = (dbProduct?.description as string | undefined) ?? mock?.description ?? "Consultá esta propiedad con Propiedades Sosa.";
+  const desc =
+    (dbProduct?.description as string | undefined) ??
+    mock?.description ??
+    "Consultá esta propiedad con Propiedades Sosa.";
+
+  const dbImages = dbProduct?.product_images as
+    | Array<{ url: string; position: number }>
+    | undefined;
+  const ogImage =
+    dbImages?.sort((a, b) => a.position - b.position)?.[0]?.url ??
+    mock?.imageUrl ??
+    null;
+
   return {
-    title: `${name} | Propiedades Sosa`,
+    title: name,
     description: desc.slice(0, 160),
+    alternates: { canonical: `https://propiedadessosa.com.ar/producto/${slug}` },
+    openGraph: {
+      title: `${name} | Propiedades Sosa`,
+      description: desc.slice(0, 160),
+      url: `https://propiedadessosa.com.ar/producto/${slug}`,
+      type: "website",
+      ...(ogImage && {
+        images: [{ url: ogImage, width: 1200, height: 630, alt: name }],
+      }),
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: `${name} | Propiedades Sosa`,
+      description: desc.slice(0, 160),
+      ...(ogImage && { images: [ogImage] }),
+    },
   };
 }
 
@@ -219,8 +248,45 @@ export default async function ProductPage({
     ? `U$S ${price.toLocaleString("es-AR")}`
     : null;
 
+  const pageUrl = `https://propiedadessosa.com.ar/producto/${slug}`;
+
+  const breadcrumbLd = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: [
+      { "@type": "ListItem", position: 1, name: "Inicio", item: "https://propiedadessosa.com.ar" },
+      { "@type": "ListItem", position: 2, name: "Propiedades", item: "https://propiedadessosa.com.ar/catalogo" },
+      { "@type": "ListItem", position: 3, name: name, item: pageUrl },
+    ],
+  };
+
+  const listingLd: Record<string, unknown> = {
+    "@context": "https://schema.org",
+    "@type": "RealEstateListing",
+    name,
+    url: pageUrl,
+    description: description ?? undefined,
+    ...(images.length > 0 && { image: images }),
+    provider: {
+      "@type": "RealEstateAgent",
+      name: "Propiedades Sosa",
+      telephone: "+54-9-3329-69-6105",
+      url: "https://propiedadessosa.com.ar",
+    },
+    ...(price && {
+      offers: {
+        "@type": "Offer",
+        price,
+        priceCurrency: "USD",
+        availability: "https://schema.org/InStock",
+      },
+    }),
+  };
+
   return (
     <div className="min-h-screen bg-neutral-50 pt-20">
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbLd) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(listingLd) }} />
       <div className="max-w-7xl mx-auto px-6 lg:px-10 py-12">
         <ScrollReveal>
           <nav className="flex items-center gap-2 text-sm text-neutral-400 mb-8">

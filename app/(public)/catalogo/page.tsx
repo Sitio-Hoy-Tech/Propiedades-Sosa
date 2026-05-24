@@ -8,8 +8,17 @@ import type { PropertyData } from "@/components/ui/PropertyCard";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Propiedades | Propiedades Sosa",
-  description: "Explorá nuestro catálogo de casas, departamentos, terrenos y locales en venta y alquiler.",
+  title: "Propiedades en Venta y Alquiler en Baradero",
+  description:
+    "Explorá el catálogo completo de Propiedades Sosa: casas, departamentos, terrenos y locales en venta y alquiler en Baradero y zona.",
+  alternates: { canonical: "https://propiedadessosa.com.ar/catalogo" },
+  openGraph: {
+    title: "Propiedades en Venta y Alquiler en Baradero | Propiedades Sosa",
+    description:
+      "Casas, departamentos, terrenos y locales en venta y alquiler en Baradero. Consultá con nuestros asesores.",
+    url: "https://propiedadessosa.com.ar/catalogo",
+    type: "website",
+  },
 };
 
 const useRealData = Boolean(process.env.NEXT_PUBLIC_TENANT_ID);

@@ -10,6 +10,14 @@ import AnimatedCounter from "@/components/ui/AnimatedCounter";
 import { getSectionImage } from "@/lib/placeholder-images";
 import Image from "next/image";
 import Link from "next/link";
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Propiedades Sosa | Inmobiliaria en Baradero",
+  description:
+    "Inmobiliaria en Baradero desde 2021. Comprá, alquilá o tasá tu propiedad con asesoramiento profesional. Casas, departamentos, terrenos y locales.",
+  alternates: { canonical: "https://propiedadessosa.com.ar" },
+};
 
 const SERVICES = [
   {
@@ -78,6 +86,82 @@ const getFeaturedProperties = unstable_cache(
   { tags: [TAGS.PRODUCTS] }
 );
 
+const LOCAL_BUSINESS_LD = {
+  "@context": "https://schema.org",
+  "@type": "RealEstateAgent",
+  name: "Propiedades Sosa",
+  url: "https://propiedadessosa.com.ar",
+  logo: "https://propiedadessosa.com.ar/logo.png",
+  image: "https://propiedadessosa.com.ar/sosapropiedades.webp",
+  telephone: "+54-9-3329-69-6105",
+  email: "info@propiedadessosa.com.ar",
+  address: {
+    "@type": "PostalAddress",
+    addressLocality: "Baradero",
+    addressRegion: "Buenos Aires",
+    addressCountry: "AR",
+  },
+  openingHoursSpecification: {
+    "@type": "OpeningHoursSpecification",
+    dayOfWeek: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+    opens: "09:00",
+    closes: "18:00",
+  },
+  description:
+    "Inmobiliaria en Baradero desde 2021. Compra, venta, alquiler y tasaciones de propiedades.",
+  areaServed: { "@type": "City", name: "Baradero" },
+  priceRange: "$$",
+  knowsAbout: ["compraventa inmobiliaria", "alquiler", "tasaciones", "asesoramiento inmobiliario"],
+  foundingDate: "2021",
+};
+
+const FAQ_LD = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  mainEntity: [
+    {
+      "@type": "Question",
+      name: "¿Cómo es el proceso de compra de una propiedad?",
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: "El proceso comienza con la búsqueda y selección de la propiedad. Luego se firma una reserva, seguida de un boleto de compraventa. Finalmente se lleva a cabo la escrituración ante escribano público. Nuestro equipo te acompaña en cada paso.",
+      },
+    },
+    {
+      "@type": "Question",
+      name: "¿Qué documentación necesito para alquilar?",
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: "Para alquilar necesitás DNI vigente, recibos de sueldo o comprobante de ingresos de los últimos 3 meses, y un garante propietario con título de propiedad. También aceptamos seguro de caución como alternativa al garante.",
+      },
+    },
+    {
+      "@type": "Question",
+      name: "¿Cuáles son los gastos al comprar una propiedad?",
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: "Al comprar una propiedad los gastos habituales incluyen: honorarios inmobiliarios (3–4% del precio), gastos de escrituración (3–5%), y sellado provincial. Te asesoramos con un presupuesto detallado para cada caso.",
+      },
+    },
+    {
+      "@type": "Question",
+      name: "¿Puedo tasar mi propiedad sin compromiso?",
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: "Sí. Ofrecemos tasaciones gratuitas y sin compromiso. Un martillero matriculado visita tu propiedad y te entrega una valoración profesional basada en el mercado actual de la zona.",
+      },
+    },
+    {
+      "@type": "Question",
+      name: "¿Trabajan con propiedades fuera de la zona?",
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: "Nos especializamos en la zona local y alrededores. Para propiedades fuera del radio habitual, contamos con una red de profesionales asociados a quienes podemos referirte.",
+      },
+    },
+  ],
+};
+
 export default async function HomePage() {
   const nosotrosImg = getSectionImage("arquitectura moderna exterior", 1400, 900, 19);
   const properties = await getFeaturedProperties();
@@ -87,6 +171,14 @@ export default async function HomePage() {
 
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(LOCAL_BUSINESS_LD) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(FAQ_LD) }}
+      />
       <HeroSection />
 
       {/* ── Featured Properties (Editorial Bento) ── */}

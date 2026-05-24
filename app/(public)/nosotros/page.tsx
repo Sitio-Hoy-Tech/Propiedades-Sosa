@@ -5,8 +5,53 @@ import Image from "next/image";
 import Link from "next/link";
 
 export const metadata: Metadata = {
-  title: "Nosotros | Propiedades Sosa",
-  description: "Inmobiliaria arraigada en Baradero desde 2021. Eficiencia, honestidad, ética y confidencialidad en cada operación.",
+  title: "Quiénes Somos — Inmobiliaria en Baradero desde 2021",
+  description:
+    "Conocé al equipo de Propiedades Sosa: Eduardo Sosa (Martillero Matriculado), Valeria Sosa y Marcos Pérez. Eficiencia, honestidad, ética y confidencialidad desde 2021.",
+  alternates: { canonical: "https://propiedadessosa.com.ar/nosotros" },
+  openGraph: {
+    title: "Quiénes Somos | Propiedades Sosa",
+    description:
+      "Inmobiliaria arraigada en Baradero desde 2021. Eficiencia, honestidad, ética y confidencialidad en cada operación.",
+    url: "https://propiedadessosa.com.ar/nosotros",
+    type: "website",
+  },
+};
+
+const ORGANIZATION_LD = {
+  "@context": "https://schema.org",
+  "@type": "RealEstateAgent",
+  name: "Propiedades Sosa",
+  url: "https://propiedadessosa.com.ar",
+  logo: "https://propiedadessosa.com.ar/logo.png",
+  telephone: "+54-9-3329-69-6105",
+  email: "info@propiedadessosa.com.ar",
+  foundingDate: "2021",
+  address: {
+    "@type": "PostalAddress",
+    addressLocality: "Baradero",
+    addressRegion: "Buenos Aires",
+    addressCountry: "AR",
+  },
+  employee: [
+    {
+      "@type": "Person",
+      name: "Eduardo Sosa",
+      jobTitle: "Titular — Martillero Matriculado",
+    },
+    {
+      "@type": "Person",
+      name: "Valeria Sosa",
+      jobTitle: "Asesora Inmobiliaria",
+    },
+    {
+      "@type": "Person",
+      name: "Marcos Pérez",
+      jobTitle: "Corredor Inmobiliario",
+    },
+  ],
+  description:
+    "Inmobiliaria arraigada en Baradero desde 2021. Eficiencia, honestidad, ética y confidencialidad en cada operación.",
 };
 
 const VALUES = [
@@ -52,6 +97,10 @@ export default function NosotrosPage() {
 
   return (
     <div className="min-h-screen bg-neutral-50">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(ORGANIZATION_LD) }}
+      />
       {/* Hero */}
       <section className="relative h-72 md:h-96 overflow-hidden">
         <Image
