@@ -6,8 +6,10 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useState } from "react";
 import MobileMenu from "./MobileMenu";
+import { getWhatsAppUrl } from "@/lib/whatsapp";
 
 const NAV_LINKS = [
+  { href: "/", label: "Inicio" },
   { href: "/catalogo", label: "Propiedades" },
   { href: "/nosotros", label: "Nosotros" },
   { href: "/contacto", label: "Contacto" },
@@ -15,7 +17,7 @@ const NAV_LINKS = [
 
 const EASE: [number, number, number, number] = [0.22, 1, 0.36, 1];
 
-export default function Header() {
+export default function Header({ whatsapp }: { whatsapp: string }) {
   const pathname = usePathname();
   const isHome = pathname === "/";
   const [scrolled, setScrolled] = useState(false);
@@ -47,7 +49,7 @@ export default function Header() {
           style={{ backdropFilter: scrolled ? "blur(20px)" : "none" }}
         />
 
-        <div className="relative max-w-7xl mx-auto px-6 lg:px-10 flex items-center justify-between h-[70px]">
+        <div className="relative max-w-7xl mx-auto px-12 lg:px-20 flex items-center justify-between h-[82px]">
           {/* Logo */}
           <Link
             href="/"
@@ -77,6 +79,12 @@ export default function Header() {
                 <Link
                   key={link.href}
                   href={link.href}
+                  onClick={(e) => {
+                    if (link.href === "/" && pathname === "/") {
+                      e.preventDefault();
+                      window.scrollTo({ top: 0, behavior: "smooth" });
+                    }
+                  }}
                   className={`relative text-sm font-medium tracking-wide transition-colors duration-200 ${
                     active ? "text-brand-accent" : "text-white/70 hover:text-white"
                   }`}
@@ -97,7 +105,7 @@ export default function Header() {
           {/* CTA + Hamburger */}
           <div className="flex items-center gap-4">
             <motion.a
-              href="https://wa.me/5493329696105"
+              href={getWhatsAppUrl(whatsapp)}
               target="_blank"
               rel="noopener noreferrer"
               className="hidden md:flex items-center gap-2 text-white text-xs font-semibold tracking-widest uppercase px-5 py-2.5 border border-brand-accent/50 hover:border-brand-accent hover:bg-brand-accent transition-all duration-200"
@@ -135,7 +143,7 @@ export default function Header() {
         </div>
       </motion.header>
 
-      <MobileMenu open={menuOpen} onClose={() => setMenuOpen(false)} />
+      <MobileMenu open={menuOpen} onClose={() => setMenuOpen(false)} whatsapp={whatsapp} />
     </>
   );
 }

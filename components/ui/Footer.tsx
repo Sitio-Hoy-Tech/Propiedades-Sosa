@@ -1,6 +1,10 @@
+"use client";
+
 import Image from "next/image";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import SitioHoyBranding from "./SitioHoyBranding";
+import { getWhatsAppUrl } from "@/lib/whatsapp";
 
 const NAV = [
   { href: "/", label: "Inicio" },
@@ -9,8 +13,9 @@ const NAV = [
   { href: "/contacto", label: "Contacto" },
 ];
 
-export default function Footer() {
+export default function Footer({ whatsapp }: { whatsapp: string }) {
   const year = new Date().getFullYear();
+  const pathname = usePathname();
 
   return (
     <footer className="bg-brand-dark text-white">
@@ -32,7 +37,7 @@ export default function Footer() {
           </div>
           <div className="flex flex-col sm:flex-row gap-3 flex-shrink-0 w-full md:w-auto">
             <a
-              href="https://wa.me/5493329696105"
+              href={getWhatsAppUrl(whatsapp)}
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center gap-2 bg-brand-accent hover:bg-brand-accent/90 text-white font-semibold px-7 py-3.5 text-sm tracking-wide transition-colors"
@@ -60,13 +65,23 @@ export default function Footer() {
           {/* Brand */}
           <div>
             <div className="mb-5">
-              <Image
-                src="/logo.png"
-                alt="Sosa Propiedades"
-                width={120}
-                height={69}
-                className="object-contain"
-              />
+              <Link
+                href="/"
+                onClick={(e) => {
+                  if (pathname === "/") {
+                    e.preventDefault();
+                    window.scrollTo({ top: 0, behavior: "smooth" });
+                  }
+                }}
+              >
+                <Image
+                  src="/logo.png"
+                  alt="Sosa Propiedades"
+                  width={120}
+                  height={69}
+                  className="object-contain"
+                />
+              </Link>
             </div>
             <p className="text-white/35 text-sm leading-relaxed max-w-xs">
               Inmobiliaria arraigada en Baradero desde 2021. Eficiencia, honestidad y compromiso en cada operación.
@@ -95,7 +110,7 @@ export default function Footer() {
             <p className="text-white/25 text-[10px] font-semibold tracking-[0.2em] uppercase mb-5">Contacto</p>
             <ul className="flex flex-col gap-3 text-sm">
               <li>
-                <a href="https://wa.me/5493329696105" target="_blank" rel="noopener noreferrer" className="text-white/50 hover:text-brand-accent transition-colors link-underline">
+                <a href={getWhatsAppUrl(whatsapp)} target="_blank" rel="noopener noreferrer" className="text-white/50 hover:text-brand-accent transition-colors link-underline">
                   +54 9 3329 69-6105
                 </a>
               </li>

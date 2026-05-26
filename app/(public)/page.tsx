@@ -1,6 +1,6 @@
 import { unstable_cache } from "next/cache";
 import { createAdminClient } from "@/lib/supabase/admin";
-import { getTenantId } from "@/lib/tenant";
+import { getTenantId, getTenantConfig } from "@/lib/tenant";
 import { TAGS } from "@/lib/cache-tags";
 import HeroSection from "@/components/ui/HeroSection";
 import FAQSection from "@/components/ui/FAQSection";
@@ -164,7 +164,8 @@ const FAQ_LD = {
 
 export default async function HomePage() {
   const nosotrosImg = getSectionImage("arquitectura moderna exterior", 1400, 900, 19);
-  const properties = await getFeaturedProperties();
+  const [properties, tenant] = await Promise.all([getFeaturedProperties(), getTenantConfig()]);
+  const whatsapp = tenant.whatsapp ?? "";
 
   const largeProp = properties[0];
   const smallProps = properties.slice(1, 3);
@@ -179,7 +180,7 @@ export default async function HomePage() {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(FAQ_LD) }}
       />
-      <HeroSection />
+      <HeroSection whatsapp={whatsapp} />
 
       {/* ── Featured Properties (Editorial Bento) ── */}
       <section className="py-14 px-4 sm:px-6 lg:py-28 bg-neutral-50">
@@ -240,7 +241,7 @@ export default async function HomePage() {
               { to: 98, suffix: "%", label: "Clientes satisfechos", desc: "recomiendan nuestro servicio" },
             ].map((stat, i) => (
               <ScrollReveal key={stat.label} delay={i * 0.15} direction="up">
-                <div className="text-center sm:text-left border-t border-white/10 pt-8">
+                <div className="text-center border-t border-white/10 pt-8">
                   <p
                     className="font-display font-bold text-white leading-none mb-2"
                     style={{ fontFamily: "var(--font-display)", fontSize: "clamp(3.5rem, 6vw, 5rem)" }}
@@ -371,7 +372,7 @@ export default async function HomePage() {
         </div>
       </section>
 
-      <FAQSection />
+      <FAQSection whatsapp={whatsapp} />
     </>
   );
 }

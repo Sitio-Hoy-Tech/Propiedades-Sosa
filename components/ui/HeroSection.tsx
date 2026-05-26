@@ -10,6 +10,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
 import AnimatedCounter from "./AnimatedCounter";
+import { getWhatsAppUrl } from "@/lib/whatsapp";
 
 const HERO_IMG = "https://images.unsplash.com/photo-1613490493576-7fde63acd811?w=1800&q=85&auto=format&fit=crop";
 
@@ -60,7 +61,7 @@ function WordLine({ text, delay = 0 }: { text: string; delay?: number }) {
   );
 }
 
-export default function HeroSection() {
+export default function HeroSection({ whatsapp }: { whatsapp: string }) {
   const sectionRef = useRef<HTMLElement>(null);
   const [isMobile, setIsMobile] = useState(true);
 
@@ -118,7 +119,7 @@ export default function HeroSection() {
 
       {/* Content */}
       <motion.div
-        className="relative z-10 w-full max-w-7xl mx-auto px-6 lg:px-10 pt-20 lg:pt-0"
+        className="relative z-10 w-full max-w-7xl mx-auto px-6 lg:px-10 pt-20 lg:pt-28"
         style={{ y: isMobile ? 0 : contentY }}
       >
         <motion.div
@@ -177,7 +178,7 @@ export default function HeroSection() {
               </svg>
             </Link>
             <a
-              href="https://wa.me/5493329696105"
+              href={getWhatsAppUrl(whatsapp)}
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center justify-center gap-3 border border-white/25 text-white font-medium px-8 py-4 transition-all duration-300 hover:border-white/50 hover:bg-white/5"

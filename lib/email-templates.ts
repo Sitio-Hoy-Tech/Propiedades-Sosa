@@ -120,11 +120,13 @@ export function clientConfirmationHtml({
   contactEmail,
   clientName,
   message,
+  whatsappUrl,
 }: {
   tenantName: string;
   contactEmail: string;
   clientName: string;
   message: string;
+  whatsappUrl?: string;
 }): string {
   const body = `
   <tr>
@@ -156,7 +158,7 @@ export function clientConfirmationHtml({
       <table role="presentation" cellpadding="0" cellspacing="0" border="0">
         <tr>
           <td style="background-color:#25D366;border-radius:3px;">
-            <a href="https://wa.me/5493329696105" style="display:inline-block;padding:11px 26px;font-size:13px;font-weight:600;color:#ffffff;text-decoration:none;letter-spacing:0.05em;">Abrir WhatsApp</a>
+            <a href="${whatsappUrl ?? ""}" style="display:inline-block;padding:11px 26px;font-size:13px;font-weight:600;color:#ffffff;text-decoration:none;letter-spacing:0.05em;">Abrir WhatsApp</a>
           </td>
         </tr>
       </table>

@@ -1,5 +1,7 @@
 import ScrollReveal from "@/components/ui/ScrollReveal";
 import { getSectionImage } from "@/lib/placeholder-images";
+import { getWhatsAppUrl } from "@/lib/whatsapp";
+import { getTenantConfig } from "@/lib/tenant";
 import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
@@ -91,9 +93,11 @@ const TEAM = [
   },
 ];
 
-export default function NosotrosPage() {
+export default async function NosotrosPage() {
   const heroImg = getSectionImage("arquitectura moderna edificio", 1600, 900, 23);
   const officImg = getSectionImage("oficina moderna interior", 1200, 800, 31);
+  const tenant = await getTenantConfig();
+  const whatsapp = tenant.whatsapp ?? "";
 
   return (
     <div className="min-h-screen bg-neutral-50">
@@ -263,7 +267,7 @@ export default function NosotrosPage() {
                 Enviar consulta
               </Link>
               <a
-                href="https://wa.me/5493329696105"
+                href={getWhatsAppUrl(whatsapp)}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-flex items-center justify-center gap-2 border border-brand-accent text-brand-accent hover:bg-brand-accent hover:text-white font-semibold px-8 py-3.5 rounded-xl transition-colors"

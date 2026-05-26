@@ -1,15 +1,19 @@
-interface WhatsAppLinkParams {
-  message?: string;
-  productName?: string;
-  productUrl?: string;
+function sanitizeNumber(raw: string): string {
+  const digits = raw.replace(/\D/g, "");
+  if (digits.length === 10) return `549${digits}`;
+  if (digits.length === 11 && digits.startsWith("54")) return `549${digits.slice(2)}`;
+  return digits;
 }
 
-export function buildWhatsAppLink({
-  message,
-  productName,
-  productUrl,
-}: WhatsAppLinkParams = {}): string {
-  const number = process.env.NEXT_PUBLIC_WHATSAPP_NUMBER;
+export function getWhatsAppUrl(raw: string): string {
+  return `https://wa.me/${sanitizeNumber(raw)}`;
+}
+
+export function buildWhatsAppLink(
+  raw: string,
+  { message, productName, productUrl }: { message?: string; productName?: string; productUrl?: string } = {}
+): string {
+  const number = sanitizeNumber(raw);
   let text = message;
 
   if (!text && productName) {

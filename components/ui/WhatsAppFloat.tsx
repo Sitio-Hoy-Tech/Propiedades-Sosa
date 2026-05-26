@@ -4,7 +4,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { useState, useEffect } from "react";
 import { buildWhatsAppLink } from "@/lib/whatsapp";
 
-export default function WhatsAppFloat() {
+export default function WhatsAppFloat({ whatsapp }: { whatsapp: string }) {
   const [visible, setVisible] = useState(false);
   const [tooltip, setTooltip] = useState(false);
 
@@ -13,7 +13,7 @@ export default function WhatsAppFloat() {
     return () => clearTimeout(timer);
   }, []);
 
-  const href = buildWhatsAppLink({ message: "Hola, me contacto desde la web de Propiedades Sosa. Quisiera recibir más información." });
+  const href = buildWhatsAppLink(whatsapp, { message: "Hola, me contacto desde la web de Propiedades Sosa. Quisiera recibir más información." });
 
   return (
     <AnimatePresence>

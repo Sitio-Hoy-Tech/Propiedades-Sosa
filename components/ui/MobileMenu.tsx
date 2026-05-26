@@ -4,6 +4,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect } from "react";
+import { getWhatsAppUrl } from "@/lib/whatsapp";
 
 const NAV_LINKS = [
   { href: "/", label: "Inicio" },
@@ -15,9 +16,10 @@ const NAV_LINKS = [
 interface MobileMenuProps {
   open: boolean;
   onClose: () => void;
+  whatsapp: string;
 }
 
-export default function MobileMenu({ open, onClose }: MobileMenuProps) {
+export default function MobileMenu({ open, onClose, whatsapp }: MobileMenuProps) {
   const pathname = usePathname();
 
   useEffect(() => {
@@ -82,7 +84,7 @@ export default function MobileMenu({ open, onClose }: MobileMenuProps) {
 
             <div className="mt-auto">
               <a
-                href={`https://wa.me/${process.env.NEXT_PUBLIC_WHATSAPP_NUMBER || "5493329696105"}`}
+                href={getWhatsAppUrl(whatsapp)}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="flex items-center gap-2 bg-brand-accent text-white font-medium px-5 py-3 rounded-xl text-sm"

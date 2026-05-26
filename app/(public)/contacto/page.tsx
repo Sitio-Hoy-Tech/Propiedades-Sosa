@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import ScrollReveal from "@/components/ui/ScrollReveal";
 import ContactForm from "./ContactForm";
+import { getWhatsAppUrl } from "@/lib/whatsapp";
+import { getTenantConfig } from "@/lib/tenant";
 
 export const metadata: Metadata = {
   title: "Contacto",
@@ -36,7 +38,9 @@ const CONTACT_PAGE_LD = {
   },
 };
 
-export default function ContactPage() {
+export default async function ContactPage() {
+  const tenant = await getTenantConfig();
+  const whatsapp = tenant.whatsapp ?? "";
   return (
     <div className="min-h-screen bg-neutral-50 pt-20">
       <script
@@ -88,7 +92,7 @@ export default function ContactPage() {
 
             <div className="flex flex-col gap-5">
               <a
-                href="https://wa.me/5493329696105"
+                href={getWhatsAppUrl(whatsapp)}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="flex items-start gap-3 group"

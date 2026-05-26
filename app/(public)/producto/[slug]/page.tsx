@@ -1,6 +1,6 @@
 import { unstable_cache } from "next/cache";
 import { createAdminClient } from "@/lib/supabase/admin";
-import { getTenantId } from "@/lib/tenant";
+import { getTenantId, getTenantConfig } from "@/lib/tenant";
 import { notFound } from "next/navigation";
 import { TAGS } from "@/lib/cache-tags";
 import { MOCK_PROPERTIES } from "@/lib/mock-properties";
@@ -209,7 +209,10 @@ export default async function ProductPage({
   let images: string[] = [];
   let features: Feature[] = [];
 
-  const dbProduct = useRealData ? await getProduct(slug) : null;
+  const [dbProduct, tenant] = await Promise.all([
+    useRealData ? getProduct(slug) : Promise.resolve(null),
+    getTenantConfig(),
+  ]);
   const mock = MOCK_PROPERTIES.find((p) => p.slug === slug);
 
   if (!dbProduct && !mock) notFound();
@@ -240,7 +243,7 @@ export default async function ProductPage({
     ];
   }
 
-  const whatsappUrl = buildWhatsAppLink({
+  const whatsappUrl = buildWhatsAppLink(tenant.whatsapp ?? "", {
     message: `Hola, me interesa la propiedad "${name}". ¿Podría darme más información?`,
   });
 

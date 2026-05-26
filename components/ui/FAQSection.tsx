@@ -2,6 +2,7 @@
 
 import { motion, AnimatePresence } from "framer-motion";
 import { useState } from "react";
+import { getWhatsAppUrl } from "@/lib/whatsapp";
 
 const FAQS = [
   {
@@ -38,7 +39,7 @@ function toRoman(n: number): string {
   return result;
 }
 
-export default function FAQSection() {
+export default function FAQSection({ whatsapp }: { whatsapp: string }) {
   const [open, setOpen] = useState<number | null>(0);
 
   return (
@@ -64,7 +65,7 @@ export default function FAQSection() {
           </p>
 
           <a
-            href="https://wa.me/5493329696105"
+            href={getWhatsAppUrl(whatsapp)}
             target="_blank"
             rel="noopener noreferrer"
             className="inline-flex items-center gap-2 mt-8 text-brand-accent font-medium text-sm link-underline"

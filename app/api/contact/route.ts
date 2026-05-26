@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 import { Resend } from "resend";
 import { createAdminClient } from "@/lib/supabase/admin";
 import { internalNotificationHtml, clientConfirmationHtml } from "@/lib/email-templates";
+import { getWhatsAppUrl } from "@/lib/whatsapp";
 
 export async function POST(request: NextRequest) {
   const { name, email, phone, message } = await request.json();
@@ -15,7 +16,7 @@ export async function POST(request: NextRequest) {
 
   const { data: tenant } = await supabaseAdmin
     .from("tenants")
-    .select("name, resend_api_key, contact_email")
+    .select("name, resend_api_key, contact_email, whatsapp")
     .eq("id", tenantId)
     .single();
 
@@ -61,6 +62,7 @@ export async function POST(request: NextRequest) {
       contactEmail,
       clientName: name,
       message,
+      whatsappUrl: getWhatsAppUrl(tenant.whatsapp ?? ""),
     }),
   });
 
