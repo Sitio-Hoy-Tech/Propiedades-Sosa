@@ -20,6 +20,15 @@ export async function POST(request: NextRequest) {
     .eq("id", tenantId)
     .single();
 
+  await supabaseAdmin.from("contact_messages").insert({
+    tenant_id: tenantId,
+    name,
+    email,
+    phone: phone || null,
+    message,
+    source: "contact_form",
+  });
+
   if (!tenant?.resend_api_key || !tenant?.contact_email) {
     console.warn(`Resend no configurado para tenant ${tenantId}`);
     return NextResponse.json({ ok: true });
