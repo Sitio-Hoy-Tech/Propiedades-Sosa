@@ -117,7 +117,8 @@ body {
 /* ─── Animated underline link ────────────────────────────────── */
 .link-underline {
   position: relative;
-  display: inline-block;
+  display: inline-flex;
+  align-items: center;
 }
 .link-underline::after {
   content: '';
