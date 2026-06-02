@@ -2,6 +2,7 @@ import { unstable_cache } from "next/cache";
 import { createAdminClient } from "@/lib/supabase/admin";
 import { getTenantId, getTenantConfig } from "@/lib/tenant";
 import { TAGS } from "@/lib/cache-tags";
+import { PRODUCT_SELECT, mapDbProductToPropertyData } from "@/lib/products";
 import HeroSection from "@/components/ui/HeroSection";
 import FAQSection from "@/components/ui/FAQSection";
 import PropertyCard, { type PropertyData } from "@/components/ui/PropertyCard";
@@ -50,7 +51,7 @@ const getFeaturedProperties = unstable_cache(
 
       const { data } = await supabase
         .from("products")
-        .select("id, name, slug, price, description, featured, product_images (url, alt, position)")
+        .select(PRODUCT_SELECT)
         .eq("tenant_id", tenantId)
         .eq("active", true)
         .order("featured", { ascending: false })
@@ -59,25 +60,9 @@ const getFeaturedProperties = unstable_cache(
 
       if (!data?.length) return [];
 
-      return data.map((p) => {
-        const imgs = (p.product_images as Array<{ url: string; position: number }> | undefined)
-          ?.sort((a, b) => a.position - b.position);
-        const nameLower = (p.name as string).toLowerCase();
-        let operation: string | undefined;
-        if (nameLower.includes("alquiler")) operation = "Alquiler";
-        else if (nameLower.includes("venta")) operation = "Venta";
-
-        return {
-          slug: p.slug as string,
-          name: p.name as string,
-          description: p.description ? String(p.description) : undefined,
-          price: (p.price as number) > 0 ? (p.price as number) : undefined,
-          currency: "USD",
-          operation,
-          imageUrl: imgs?.[0]?.url ?? "https://loremflickr.com/800/600/house",
-          badge: p.featured ? "Destacada" : undefined,
-        };
-      });
+      return (data as unknown[]).map((p) =>
+        mapDbProductToPropertyData(p as Record<string, unknown>, { withBadge: true })
+      );
     } catch {
       return [];
     }
@@ -183,7 +168,7 @@ export default async function HomePage() {
       <HeroSection whatsapp={whatsapp} />
 
       {/* ── Featured Properties (Editorial Bento) ── */}
-      <section className="py-14 px-4 sm:px-6 lg:py-28 bg-neutral-50">
+      <section className="pt-24 pb-14 md:py-14 px-4 sm:px-6 lg:py-28 bg-neutral-50">
         <div className="max-w-7xl mx-auto">
           <ScrollReveal className="mb-10 lg:mb-14 flex flex-col sm:flex-row sm:items-end justify-between gap-4 sm:gap-6">
             <div>
@@ -258,7 +243,7 @@ export default async function HomePage() {
       </section>
 
       {/* ── Services — numbered list ── */}
-      <section className="py-14 px-4 sm:px-6 lg:py-28 bg-neutral-50">
+      <section className="py-14 px-6 sm:px-6 lg:py-28 bg-neutral-50">
         <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-[1fr_1.5fr] gap-12 lg:gap-20 items-start">
           <ScrollReveal direction="left" className="lg:sticky lg:top-28">
             <span className="flex items-center gap-3 text-brand-accent text-xs font-semibold tracking-[0.2em] uppercase mb-4">

@@ -97,6 +97,10 @@ export default function Footer({ whatsapp }: { whatsapp: string }) {
                   <Link
                     href={link.href}
                     className="text-white/50 hover:text-brand-accent text-sm transition-colors link-underline"
+                    onClick={link.href === "/" && pathname === "/" ? (e) => {
+                      e.preventDefault();
+                      window.scrollTo({ top: 0, behavior: "smooth" });
+                    } : undefined}
                   >
                     {link.label}
                   </Link>

@@ -4,7 +4,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { useState, useEffect } from "react";
 import { buildWhatsAppLink } from "@/lib/whatsapp";
 
-export default function WhatsAppFloat({ whatsapp }: { whatsapp: string }) {
+export default function WhatsAppFloat({ whatsapp, menuOpen = false }: { whatsapp: string; menuOpen?: boolean }) {
   const [visible, setVisible] = useState(false);
   const [tooltip, setTooltip] = useState(false);
 
@@ -17,7 +17,7 @@ export default function WhatsAppFloat({ whatsapp }: { whatsapp: string }) {
 
   return (
     <AnimatePresence>
-      {visible && (
+      {visible && !menuOpen && (
         <motion.div
           className="fixed bottom-6 right-6 z-50 flex items-center gap-3"
           initial={{ opacity: 0, scale: 0.5, y: 20 }}

@@ -9,7 +9,7 @@ import Link from "next/link";
 export const metadata: Metadata = {
   title: "Quiénes Somos — Inmobiliaria en Baradero desde 2021",
   description:
-    "Conocé al equipo de Propiedades Sosa: Eduardo Sosa (Martillero Matriculado), Valeria Sosa y Marcos Pérez. Eficiencia, honestidad, ética y confidencialidad desde 2021.",
+    "Conocé a Agustín Sosa, Titular Martillero Público de Propiedades Sosa. Eficiencia, honestidad, ética y confidencialidad desde 2021.",
   alternates: { canonical: "https://propiedadessosa.com.ar/nosotros" },
   openGraph: {
     title: "Quiénes Somos | Propiedades Sosa",
@@ -38,18 +38,8 @@ const ORGANIZATION_LD = {
   employee: [
     {
       "@type": "Person",
-      name: "Eduardo Sosa",
-      jobTitle: "Titular — Martillero Matriculado",
-    },
-    {
-      "@type": "Person",
-      name: "Valeria Sosa",
-      jobTitle: "Asesora Inmobiliaria",
-    },
-    {
-      "@type": "Person",
-      name: "Marcos Pérez",
-      jobTitle: "Corredor Inmobiliario",
+      name: "Agustín Sosa",
+      jobTitle: "Titular — Martillero Público",
     },
   ],
   description:
@@ -77,19 +67,9 @@ const VALUES = [
 
 const TEAM = [
   {
-    name: "Eduardo Sosa",
-    role: "Titular · Martillero Matriculado",
+    name: "Agustín Sosa",
+    role: "Titular · Martillero Público",
     img: getSectionImage("profesional", 400, 400, 42),
-  },
-  {
-    name: "Valeria Sosa",
-    role: "Asesora Inmobiliaria",
-    img: getSectionImage("profesional", 400, 400, 38),
-  },
-  {
-    name: "Marcos Pérez",
-    role: "Corredor Inmobiliario",
-    img: getSectionImage("profesional", 400, 400, 29),
   },
 ];
 
@@ -188,8 +168,8 @@ export default async function NosotrosPage() {
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
             {VALUES.map((v, i) => (
-              <ScrollReveal key={v.title} delay={i * 0.1}>
-                <div className="border border-white/10 rounded-2xl p-7 hover:bg-white/5 transition-colors">
+              <ScrollReveal key={v.title} delay={i * 0.1} className="h-full">
+                <div className="h-full border border-white/10 rounded-2xl p-7 hover:bg-white/5 transition-colors">
                   <div className="w-8 h-1 bg-brand-accent rounded-full mb-5" />
                   <h3
                     className="font-display text-lg font-semibold text-white mb-2"
@@ -220,7 +200,7 @@ export default async function NosotrosPage() {
             </h2>
           </ScrollReveal>
 
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-8 max-w-3xl mx-auto">
+          <div className="flex justify-center">
             {TEAM.map((member, i) => (
               <ScrollReveal key={member.name} delay={i * 0.12} className="text-center">
                 <div className="relative w-32 h-32 rounded-2xl overflow-hidden mx-auto mb-4 shadow-lg">

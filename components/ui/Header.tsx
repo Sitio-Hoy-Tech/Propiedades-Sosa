@@ -4,7 +4,7 @@ import { motion, useScroll, useMotionValueEvent } from "framer-motion";
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import MobileMenu from "./MobileMenu";
 import { getWhatsAppUrl } from "@/lib/whatsapp";
 
@@ -17,15 +17,39 @@ const NAV_LINKS = [
 
 const EASE: [number, number, number, number] = [0.22, 1, 0.36, 1];
 
-export default function Header({ whatsapp }: { whatsapp: string }) {
+export default function Header({ whatsapp, onMenuOpenChange }: { whatsapp: string; onMenuOpenChange?: (open: boolean) => void }) {
   const pathname = usePathname();
   const isHome = pathname === "/";
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
   const { scrollY } = useScroll();
 
+  useEffect(() => {
+    onMenuOpenChange?.(menuOpen);
+  }, [menuOpen, onMenuOpenChange]);
+
+  useEffect(() => {
+    if (menuOpen) {
+      const scrollY = window.scrollY;
+      document.body.style.position = "fixed";
+      document.body.style.top = `-${scrollY}px`;
+      document.body.style.width = "100%";
+    } else {
+      const top = document.body.style.top;
+      document.body.style.position = "";
+      document.body.style.top = "";
+      document.body.style.width = "";
+      if (top) window.scrollTo(0, -parseInt(top, 10));
+    }
+    return () => {
+      document.body.style.position = "";
+      document.body.style.top = "";
+      document.body.style.width = "";
+    };
+  }, [menuOpen]);
+
   useMotionValueEvent(scrollY, "change", (y) => {
-    setScrolled(y > 80);
+    setScrolled(y > 1);
   });
 
   const transparent = isHome && !scrolled;

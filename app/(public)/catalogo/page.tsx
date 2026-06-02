@@ -1,7 +1,7 @@
 import { unstable_cache } from "next/cache";
 import { createAdminClient } from "@/lib/supabase/admin";
-import { getTenantId } from "@/lib/tenant";
 import { TAGS } from "@/lib/cache-tags";
+import { PRODUCT_SELECT, mapDbProductToPropertyData } from "@/lib/products";
 import CatalogClient from "./CatalogClient";
 import { MOCK_PROPERTIES } from "@/lib/mock-properties";
 import type { PropertyData } from "@/components/ui/PropertyCard";
@@ -22,20 +22,15 @@ export const metadata: Metadata = {
 };
 
 const useRealData = Boolean(process.env.NEXT_PUBLIC_TENANT_ID);
-
 const tenantId = process.env.NEXT_PUBLIC_TENANT_ID!;
 
 const getProducts = unstable_cache(
   async () => {
     try {
       const supabaseAdmin = createAdminClient();
-
       const { data, error } = await supabaseAdmin
         .from("products")
-        .select(`
-          id, name, slug, price, description, featured,
-          product_images (id, url, alt, position)
-        `)
+        .select(PRODUCT_SELECT)
         .eq("tenant_id", tenantId)
         .eq("active", true)
         .order("featured", { ascending: false })
@@ -53,36 +48,14 @@ const getProducts = unstable_cache(
   { tags: [TAGS.PRODUCTS] }
 );
 
-function mapDbToPropertyData(p: Record<string, unknown>): PropertyData {
-  const images = (p.product_images as Array<{ url: string; position: number }> | undefined)
-    ?.sort((a, b) => a.position - b.position);
-  const name = String(p.name ?? "Propiedad");
-  const slug = String(p.slug ?? "");
-
-  const nameLower = name.toLowerCase();
-  let operation: string | undefined;
-  if (nameLower.includes("alquiler") || nameLower.includes("arrend")) operation = "Alquiler";
-  else if (nameLower.includes("venta") || nameLower.includes("subdiv")) operation = "Venta";
-
-  const rawPrice = p.price as number | undefined;
-
-  return {
-    slug,
-    name,
-    description: p.description ? String(p.description) : undefined,
-    price: rawPrice && rawPrice > 0 ? rawPrice : undefined,
-    currency: "USD",
-    operation,
-    imageUrl: images?.[0]?.url ?? `https://loremflickr.com/800/600/house,architecture?lock=1`,
-  };
-}
-
 export default async function CatalogPage() {
   let properties: PropertyData[];
 
   if (useRealData) {
     const dbProducts = await getProducts();
-    properties = dbProducts.map(mapDbToPropertyData);
+    properties = (dbProducts as unknown[]).map((p) =>
+      mapDbProductToPropertyData(p as Record<string, unknown>, { withBadge: true })
+    );
   } else {
     properties = MOCK_PROPERTIES;
   }

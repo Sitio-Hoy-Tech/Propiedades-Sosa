@@ -43,7 +43,7 @@ export default function FAQSection({ whatsapp }: { whatsapp: string }) {
   const [open, setOpen] = useState<number | null>(0);
 
   return (
-    <section className="py-14 px-4 sm:px-6 lg:py-28 bg-neutral-50">
+    <section className="py-14 px-6 sm:px-6 lg:py-28 bg-neutral-50">
       <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-[1fr_1.8fr] gap-10 lg:gap-20">
 
         {/* Left: heading sticky */}
