@@ -40,7 +40,7 @@ export default function Footer({ whatsapp }: { whatsapp: string }) {
               href={getWhatsAppUrl(whatsapp)}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 bg-brand-accent hover:bg-brand-accent/90 text-white font-semibold px-7 py-3.5 text-sm tracking-wide transition-colors"
+              className="inline-flex items-center justify-center gap-2 bg-brand-accent hover:bg-brand-accent/90 text-white font-semibold px-7 py-3.5 text-sm tracking-wide transition-colors"
               style={{ borderRadius: "3px" }}
             >
               <svg viewBox="0 0 24 24" className="w-4 h-4 fill-current flex-shrink-0">
